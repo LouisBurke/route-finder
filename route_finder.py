@@ -49,8 +49,8 @@ def get_routes(file_name):
 def get_route_description(result, source, destination):
     names = [res[0] for res in result]
     time = result[-1][1]
-    prefix = 'Shortest route from {} to {} is '.format(source, destination)
-    return prefix + ' ' + ' to '.join(names) + '. Taking ' + str(time) + ' hour(s).'
+    prefix = '{} -- {}'.format(source, destination)
+    return prefix + ' ( ' + str(time) + ' )'
 
 
 @click.command()
@@ -63,7 +63,6 @@ def get_shortest_route(source, destination, routes):
     all_paths = find_all_paths(graph, source, destination, 0)
     shortest = sort_by_shortest_route(all_paths)
     click.echo(get_route_description(shortest, source, destination))
-
 
 
 if __name__ == '__main__':
